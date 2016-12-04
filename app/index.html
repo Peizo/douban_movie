@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>豆瓣电影</title>
+
+	<link rel="stylesheet" href="http://v3.bootcss.com/dist/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="app.css">
+	<link rel="stylesheet" href="css/detail.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- load.js script.js head.js 都可以帮助我们异步的方式加载JS文件 -->
+  <script src="bower_components/script.js/dist/script.js"></script>
+	<!-- angular-loader的作用就是在使用一些异步加载脚本的库的时候，自动控制依赖顺序 -->
+  <script src="bower_components/angular-loader/angular-loader.min.js"></script>
+
+	<script>
+		$script([
+			'http://v3.bootcss.com/dist/js/bootstrap.min.js',
+			'bower_components/angular/angular.js',
+			'bower_components/angular-route/angular-route.js',
+			'app.js',
+			'movie_detail/controller.js',
+			'movie_search/controller.js',
+			'movie_list/controller.js',
+			'components/http.js',
+			'bower_components/twbs-pagination/jquery.twbsPagination.js',
+
+
+	],function(){
+			//在上面所有js库加载完之后手动引导angular渲染主应用页面  #相当于在html根节点加ng-app="moviecat"
+			angular.bootstrap(document, ['moviecat']);
+		});
+
+	</script>
+
+</head>
+<body >
+
+<nav class="navbar navbar-inverse navbar-inverse-1 navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand " id="navbar-brand-1" href="#/in_theaters/1">douban Movie Reviews</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#/search/1/?q=Dashboard">Dashboard</a></li>
+				<li><a href="#/search/1/?q=Settings">Settings</a></li>
+				<li><a href="#/search/1/?q=angular">angular</a></li>
+				<li><a href="#/search/1/?q=Help">Help</a></li>
+			</ul>
+			<form class="navbar-form navbar-right"  ng-controller="searchActionController" ng-submit="search()">
+				<input type="text" ng-blur="placeholder()" ng-click="clickSerach()" class="form-control topSerachInput" placeholder="Search..." ng-model="input">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar"  >
+			<ul class="nav nav-sidebar" ng-controller="NavController">
+				<li ng-class="{active:thisModeName=='in_theaters'}"><a href="#/in_theaters/1">正在热映</a></li>
+				<li ng-class="{active:thisModeName=='coming_soon'}"><a href="#/coming_soon/1">即将上映</a></li>
+				<li ng-class="{active:thisModeName=='top250'}"><a href="#/top250/1">TOP250</a></li>
+			</ul>
+
+
+		</div>
+
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view >
+		</div>
+	</div>
+</div>
+</body>
+</html>

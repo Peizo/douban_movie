@@ -1,0 +1,74 @@
+
+
+<div class="content" ng-show="!loading">
+	<h1 class="page-header">{{title}}</h1>
+	<h2 ng-if="message">{{message}}</h2>
+	<ul class="list-group">
+		<li ng-repeat="item in subjects" class="list-group-item movie_list_item">
+
+			<!--<span class="badge">{{item.rating.average}}</span></a>-->
+			<div class="media">
+
+				<a class="media-left" href="#/detail/{{item.id}}">
+					<img ng-src="{{item.images.medium}}" alt="{{item.title}}">
+				</a>
+
+				<div class="media-body">
+					<a class="media-left"  href="#/detail/{{item.id}}/"><h4 class="media-heading">{{item.title}}</h4></a>
+					<p>捣眼：
+					<span ng-repeat="d in item.directors">
+						{{d.name}}
+						<span ng-if="!$last">、</span>
+					</span>
+					</p>
+					<p>类型：{{item.genres.join('|')}}</p>
+					<p class="text_overflow_p"  >主演:{{getCasts(item.casts)}}</p>
+					<p>上映时间：{{item.year}}</p>
+				</div>
+			</div>
+
+			<div class="movie_item_rating">
+				<div class="rating_desc"><p ng-show="item.rating.average">豆瓣评分:</p><p ng-show="!item.rating.average">暂无评分</p></div>
+				<div  class="sky-form">
+
+							<div class="rating" ng-show="item.rating.average">
+								<!--<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=10]"></i></label>-->
+								<!--<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=9]"></i></label>-->
+								<!--<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=8]"></i></label>-->
+								<!--<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=7]"></i></label>-->
+								<!--<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=6]"></i></label>-->
+								<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=10]"></i></label>
+								<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=8]"></i></label>
+								<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=6]"></i></label>
+								<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=4]"></i></label>
+								<label ><i ng-class="{true: 'onred', false: 'icon-star'}[item.rating.average>=2]"></i></label>
+							</div>
+
+
+				</div>
+
+			</div>
+			<div class="clearfix"> </div>
+		</li>
+
+
+	</ul>
+
+
+
+		<nav aria-label="Page navigation" ng-show="!loading">
+			<ul id="pagination-demo" class="pagination"></ul>
+		</nav>
+
+
+
+
+</div>
+
+<div class="myspinner"  ng-show="loading">
+	<div class="rect1"></div>
+	<div class="rect2"></div>
+	<div class="rect3"></div>
+	<div class="rect4"></div>
+	<div class="rect5"></div>
+</div>
